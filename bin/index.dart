@@ -58,8 +58,12 @@ Router setupRouter() {
     );
   });
 
-  // API routes - ใช้ mount เพื่อ mount sub-router ที่ /api
+  // all API routes
   router.mount('/api', routers().call);
+
+  router.get('/api', (Request request) {
+    return Response.ok("You request at /");
+  });
 
   // 404 handler
   router.all('/<ignored|.*>', (Request request) {
@@ -89,7 +93,9 @@ void main() async {
   // Start the server
   final server = await serve(handler, InternetAddress.anyIPv4, 8080);
 
-  print('🚀 Server started at http://${server.address.host}:${server.port}');
+  print(
+    '🚀 Server started at http://${server.address.host}:${server.port} or http://localhost:${server.port}',
+  );
   print('📚 API Documentation:');
   print('GET    /health              - Health check');
   print('GET    /api/users           - Get all users');

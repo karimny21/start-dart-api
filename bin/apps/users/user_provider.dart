@@ -1,6 +1,6 @@
 import '../models/users.dart';
 
-class UserRepository {
+class UserProvider {
   static final List<User> _users = [
     User(
       id: 1,

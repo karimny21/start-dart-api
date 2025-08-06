@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:shelf/shelf.dart';
-import 'user_repository.dart';
+import 'user_provider.dart';
 
 class UserController {
   // GET /users
   static Response getAllUsers(Request request) {
-    final users = UserRepository.getAllUsers();
+    final users = UserProvider.getAllUsers();
     return Response.ok(
       jsonEncode({
         'success': true,
@@ -26,7 +26,7 @@ class UserController {
       );
     }
 
-    final user = UserRepository.getUserById(userId);
+    final user = UserProvider.getUserById(userId);
     if (user == null) {
       return Response.notFound(
         jsonEncode({'success': false, 'error': 'User not found'}),
@@ -59,7 +59,7 @@ class UserController {
         );
       }
 
-      final user = UserRepository.createUser(name, email);
+      final user = UserProvider.createUser(name, email);
       return Response(
         201,
         body: jsonEncode({
@@ -107,7 +107,7 @@ class UserController {
         );
       }
 
-      final success = UserRepository.updateUser(userId, name, email);
+      final success = UserProvider.updateUser(userId, name, email);
       if (!success) {
         return Response.notFound(
           jsonEncode({'success': false, 'error': 'User not found'}),
@@ -115,7 +115,7 @@ class UserController {
         );
       }
 
-      final updatedUser = UserRepository.getUserById(userId);
+      final updatedUser = UserProvider.getUserById(userId);
       return Response.ok(
         jsonEncode({
           'success': true,
@@ -142,7 +142,7 @@ class UserController {
       );
     }
 
-    final success = UserRepository.deleteUser(userId);
+    final success = UserProvider.deleteUser(userId);
     if (!success) {
       return Response.notFound(
         jsonEncode({'success': false, 'error': 'User not found'}),
