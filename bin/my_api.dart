@@ -350,5 +350,7 @@ void main() async {
   print('\n💡 Example requests:');
   print('  curl http://localhost:8080/health');
   print('  curl http://localhost:8080/users');
-  print('  curl -X POST http://localhost:8080/users -H "Content-Type: application/json" -d \'{"name":"Alice","email":"alice@example.com"}\'');
+  print(
+    '  curl -X POST http://localhost:8080/users -H "Content-Type: application/json" -d \'{"name":"Alice","email":"alice@example.com"}\'',
+  );
 }
